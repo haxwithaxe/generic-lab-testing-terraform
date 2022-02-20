@@ -1,0 +1,70 @@
+#cloud-config
+# vim: syntax=yaml
+#
+# ***********************
+# 	---- for more examples look at: ------
+# ---> https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+# ******************************
+#
+# This is the configuration syntax that the write_files module
+# will know how to understand. encoding can be given b64 or gzip or (gz+b64).
+# The content will be decoded accordingly and then written to the path that is
+# provided.
+#
+# Note: Content strings here are truncated for example purposes.
+
+sources:
+  docker:
+    keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+ntp:
+  enabled: true
+
+packages:
+  - screen
+  - neovim
+  - bash-completion
+  - net-tools
+  - dnsutils
+  - docker-ce
+  - docker-compose
+package_update: True
+package_upgrade: True
+package_reboot_if_required: True
+
+manage_etc_hosts: True
+hostname: ${hostname}
+network:
+  version: 2
+  ethernets: |
+    ens3:
+      addresses: [${address}]
+      gateway4: ${gw}
+
+ssh_pwauth: False
+chpasswd:
+  list: |
+     root:!
+  expire: False
+
+users:
+  - name: hax
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP+uH65GL+RS0gr8Yo4oMQBUa5h3hpoICKo1ku+efZjg hax@unlucky
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHO77z9BT/ZcmvAZzJRW7VpKYkBO/dAU9oAE0OWKe66r hax@orthrus
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    shell: /bin/bash
+    
+ssh_deletekeys: True
+ssh_genkeytypes: ed25519
+disable_root: True
+
+timezone: "America/New_York"
+
+runcmd:
+  - [sed, -i, 's/hax:[^:]\+/hax:!/', /etc/shadow]
+  - [sed, -i, 's/root:[^:]\+/root:!/', /etc/shadow]
+  - [update-alternatives, --set, vi, /usr/bin/nvim]
+  - [update-alternatives, --set, vim, /usr/bin/nvim]
+  - [update-alternatives, --set, editor, /usr/bin/nvim]
