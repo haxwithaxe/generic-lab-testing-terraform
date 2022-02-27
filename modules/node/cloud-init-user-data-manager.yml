@@ -1,17 +1,5 @@
 #cloud-config
 # vim: syntax=yaml
-#
-# ***********************
-# 	---- for more examples look at: ------
-# ---> https://cloudinit.readthedocs.io/en/latest/topics/examples.html
-# ******************************
-#
-# This is the configuration syntax that the write_files module
-# will know how to understand. encoding can be given b64 or gzip or (gz+b64).
-# The content will be decoded accordingly and then written to the path that is
-# provided.
-#
-# Note: Content strings here are truncated for example purposes.
 
 sources:
   docker:
@@ -35,18 +23,8 @@ package_reboot_if_required: True
 
 manage_etc_hosts: True
 hostname: ${hostname}
-network:
-  version: 2
-  ethernets: |
-    ens3:
-      addresses: [${address}]
-      gateway4: ${gw}
 
 ssh_pwauth: False
-chpasswd:
-  list: |
-     root:!
-  expire: False
 
 users:
   - name: hax
@@ -55,16 +33,29 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHO77z9BT/ZcmvAZzJRW7VpKYkBO/dAU9oAE0OWKe66r hax@orthrus
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     shell: /bin/bash
-    
+
+growpart:
+  mode: auto
+  devices: ['/']
+
 ssh_deletekeys: True
-ssh_genkeytypes: ed25519
+#ssh_genkeytypes: ed25519
+ssh_keys:
+  rsa_public: "${host_rsa_pub_key}"
+  ed25519_public: "${host_ed25519_pub_key}"
+  rsa_private: |
+    ${host_rsa_priv_key}
+
+  ed25519_private: |
+    ${host_ed25519_priv_key}
+
 disable_root: True
 
 timezone: "America/New_York"
 
 runcmd:
-  - [sed, -i, 's/hax:[^:]\+/hax:!/', /etc/shadow]
-  - [sed, -i, 's/root:[^:]\+/root:!/', /etc/shadow]
+  #- [sed, -i, 's/hax:[^:]\+/hax:!/', /etc/shadow]
+  #- [sed, -i, 's/root:[^:]\+/root:!/', /etc/shadow]
   - [update-alternatives, --set, vi, /usr/bin/nvim]
   - [update-alternatives, --set, vim, /usr/bin/nvim]
   - [update-alternatives, --set, editor, /usr/bin/nvim]

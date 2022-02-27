@@ -1,0 +1,13 @@
+#cloud-config
+# vim: syntax=yaml
+
+version: 2
+ethernets:
+  ens3:
+    addresses: []
+    dhcp4: True
+    dhcp6: False
+  ens4:
+    addresses: []
+    dhcp4: True
+    dhcp6: False
