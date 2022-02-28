@@ -34,19 +34,15 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHO77z9BT/ZcmvAZzJRW7VpKYkBO/dAU9oAE0OWKe66r hax@orthrus
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     shell: /bin/bash
+    groups: docker
 
 growpart:
   mode: auto
   devices: ['/']
 
 ssh_deletekeys: True
-#ssh_genkeytypes: ed25519
 ssh_keys:
-  rsa_public: "${host_rsa_pub_key}"
   ed25519_public: "${host_ed25519_pub_key}"
-  rsa_private: |
-    ${host_rsa_priv_key}
-
   ed25519_private: |
     ${host_ed25519_priv_key}
 

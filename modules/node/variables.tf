@@ -2,18 +2,10 @@ variable "name" {
   type = string
 }
 
-variable "type" {
-  type = string
-}
-
 variable "address" {
   type = string
   default = null
-}
-
-variable "gw" {
-  type = string
-  default = null
+  description = "Final octet of both mac addresses."
 }
 
 variable "storage_pool" {
@@ -28,7 +20,7 @@ variable "network0" {
 
 variable "network1" {
   type = string
-  default = "hostonly"
+  default = "development"
 }
 
 variable "host_ed25519_priv_key" {
@@ -43,14 +35,14 @@ variable "host_ed25519_pub_key" {
   sensitive = true
 }
 
-variable "host_rsa_priv_key" {
-  type = string
-  default = null
-  sensitive = true
-}
+#variable "host_rsa_priv_key" {
+#  type = string
+#  default = null
+#  sensitive = true
+#}
 
-variable "host_rsa_pub_key" {
-  type = string
-  default = null
-  sensitive = true
-}
+#variable "host_rsa_pub_key" {
+#  type = string
+#  default = null
+#  sensitive = true
+#}

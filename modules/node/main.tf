@@ -10,7 +10,6 @@ terraform {
 resource "libvirt_volume" "os_img" {
   name = "docker-swarm-base-${var.name}.qcow2"
   pool = var.storage_pool
-  
   source = "file:///mnt/resources/vms/ubuntu-20.04-server-cloudimg-amd64.img"
   format = "qcow2"
 }
@@ -24,23 +23,16 @@ resource "libvirt_volume" "disk_resized" {
 
 # get user data info
 data "template_file" "user_data" {
-  template = "${file("${path.module}/cloud-init-user-data-${var.type}.yml")}"
+  template = "${file("${path.module}/cloud-init-user-data.yml")}"
   vars = {
-    hostname = "ds_${var.name}"
+    hostname = "ds-${var.name}"
     host_ed25519_priv_key = var.host_ed25519_priv_key
     host_ed25519_pub_key = var.host_ed25519_pub_key
-    host_rsa_priv_key = var.host_rsa_priv_key
-    host_rsa_pub_key = var.host_rsa_pub_key
   }
 }
 
 data "template_file" "network_config" {
-  template = "${file("${path.module}/cloud-init-net-config-${var.type}.yml")}"
-  vars = {
-    hostname = "ds_${var.name}"
-    address = var.address
-    gw = var.gw
-  }
+  template = "${file("${path.module}/cloud-init-net-config.yml")}"
 }
 
 # Use CloudInit to add the instance
@@ -59,13 +51,15 @@ resource "libvirt_domain" "swarm-node" {
 
   network_interface {
     network_name = var.network0
+    mac = "0E:00:00:00:00:${var.address}"
     #wait_for_lease = "true"
   }
 
   network_interface {
     network_name = var.network1
+    mac = "0E:00:00:00:01:${var.address}"
     #wait_for_lease = "true"
-  }
+ }
 
   disk {
     volume_id = "${libvirt_volume.disk_resized.id}"
