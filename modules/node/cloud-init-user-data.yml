@@ -1,23 +1,24 @@
 #cloud-config
 # vim: syntax=yaml
 
-apt:
-  sources:
-    docker:
-      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-      source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 
 ntp:
   enabled: true
 
-packages:
-  - screen
-  - neovim
-  - bash-completion
-  - net-tools
-  - dnsutils
-  - docker-ce
-  - docker-compose
+# Using a base image with docker and tools preinstalled
+#apt:
+#  sources:
+#    docker:
+#      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+#      source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+#packages:
+#  - screen
+#  - neovim
+#  - bash-completion
+#  - net-tools
+#  - dnsutils
+#  - docker-ce
+#  - docker-compose
 package_update: True
 package_upgrade: True
 package_reboot_if_required: True

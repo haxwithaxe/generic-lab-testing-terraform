@@ -13,9 +13,9 @@ provider "libvirt" {
 
 module "nodes" {
   source = "./modules/node"
-  for_each = var.nodes
-  name = each.key
-  address = each.value
+  count = length(var.nodes)
+  name = "${count.index}${var.nodes[count.index]}"
+  address = format("%0.2x", count.index)
   host_ed25519_priv_key = var.host_ed25519_priv_key
   host_ed25519_pub_key = var.host_ed25519_pub_key
   providers = {

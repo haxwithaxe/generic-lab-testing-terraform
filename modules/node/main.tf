@@ -10,7 +10,7 @@ terraform {
 resource "libvirt_volume" "os_img" {
   name = "docker-swarm-base-${var.name}.qcow2"
   pool = var.storage_pool
-  source = "file:///mnt/resources/vms/ubuntu-20.04-server-cloudimg-amd64.img"
+  source = "file:///mnt/resources/vms/ubuntu-20.04-server-base"
   format = "qcow2"
 }
 
