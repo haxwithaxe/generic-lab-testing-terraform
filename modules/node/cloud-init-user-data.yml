@@ -40,6 +40,5 @@ timezone: "America/New_York"
 runcmd:
   - [sed, -i, 's/hax:[^:]\+/hax:!/', /etc/shadow]
   - [sed, -i, 's/root:[^:]\+/root:!/', /etc/shadow]
-  - [update-alternatives, --set, vi, /usr/bin/nvim]
-  - [update-alternatives, --set, vim, /usr/bin/nvim]
-  - [update-alternatives, --set, editor, /usr/bin/nvim]
+  - [dhclient, -r, ens3]
+  - [netplan, apply]
