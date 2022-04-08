@@ -14,10 +14,13 @@ provider "libvirt" {
 module "nodes" {
   source = "./modules/node"
   count = length(var.nodes)
-  name = "${count.index}${var.nodes[count.index]}"
+  name = "${var.nodes[count.index]}"
   address = format("%0.2x", count.index)
-  host_ed25519_priv_key = var.host_ed25519_priv_key
-  host_ed25519_pub_key = var.host_ed25519_pub_key
+  image = var.image
+  network = var.network
+  host_ed25519_priv_key = file(var.host_ed25519_priv_key)
+  host_ed25519_pub_key = file(var.host_ed25519_pub_key)
+  ram_size = var.ram_size
   providers = {
     libvirt = libvirt
   }

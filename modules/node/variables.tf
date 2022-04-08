@@ -8,17 +8,22 @@ variable "address" {
   description = "Final octet of both mac addresses."
 }
 
+variable "image" {
+  type = string
+  description = "The URI of the base image."
+}
+
 variable "storage_pool" {
   type = string
   default = "default"	
 }
 
-variable "network0" {
+variable "ram_size" {
   type = string
-  default = "default"
+  default = "2048"
 }
 
-variable "network1" {
+variable "network" {
   type = string
   default = "development"
 }

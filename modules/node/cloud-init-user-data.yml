@@ -5,28 +5,14 @@
 ntp:
   enabled: true
 
-# Using a base image with docker and tools preinstalled
-#apt:
-#  sources:
-#    docker:
-#      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-#      source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-#packages:
-#  - screen
-#  - neovim
-#  - bash-completion
-#  - net-tools
-#  - dnsutils
-#  - docker-ce
-#  - docker-compose
-package_update: True
-package_upgrade: True
-package_reboot_if_required: True
+package_update: false
+package_upgrade: false
+package_reboot_if_required: false
 
-manage_etc_hosts: True
+manage_etc_hosts: true
 hostname: ${hostname}
 
-ssh_pwauth: False
+ssh_pwauth: false
 
 users:
   - name: hax
@@ -41,13 +27,13 @@ growpart:
   mode: auto
   devices: ['/']
 
-ssh_deletekeys: True
+ssh_deletekeys: true
 ssh_keys:
   ed25519_public: "${host_ed25519_pub_key}"
   ed25519_private: |
     ${host_ed25519_priv_key}
 
-disable_root: True
+disable_root: true
 
 timezone: "America/New_York"
 
