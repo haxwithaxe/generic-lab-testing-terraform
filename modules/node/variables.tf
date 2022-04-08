@@ -1,11 +1,14 @@
-variable "name" {
-  type = string
-}
-
-variable "address" {
+variable "host_ed25519_priv_key" {
   type = string
   default = null
-  description = "Final octet of both mac addresses."
+  sensitive = true
+  description = "The ED25519 private key."
+}
+
+variable "host_ed25519_pub_key" {
+  type = string
+  default = null
+  description = "The ED25519 public key."
 }
 
 variable "image" {
@@ -13,41 +16,36 @@ variable "image" {
   description = "The URI of the base image."
 }
 
-variable "storage_pool" {
+variable "name" {
   type = string
-  default = "default"	
-}
-
-variable "ram_size" {
-  type = string
-  default = "2048"
+  description = "Node name."
 }
 
 variable "network" {
   type = string
   default = "development"
+  description = "Name of the network to attach to the node."
 }
 
-variable "host_ed25519_priv_key" {
+variable "mac" {
   type = string
   default = null
-  sensitive = true
+  description = "MAC address."
 }
 
-variable "host_ed25519_pub_key" {
+variable "project" {
   type = string
-  default = null
-  sensitive = true
+  description = "Project name. Used to prefix file names."
 }
 
-#variable "host_rsa_priv_key" {
-#  type = string
-#  default = null
-#  sensitive = true
-#}
+variable "ram_size" {
+  type = string
+  default = "2048"
+  description = "RAM size in MB."
+}
 
-#variable "host_rsa_pub_key" {
-#  type = string
-#  default = null
-#  sensitive = true
-#}
+variable "storage_pool" {
+  type = string
+  default = "default"
+  description = "The libvirt storage pool to store the images in."
+}

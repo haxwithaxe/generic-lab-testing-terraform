@@ -1,7 +1,25 @@
+variable "host_ed25519_priv_key" {
+  type = string
+  default = "ed25519_key"
+  description = "Path of the ED25519 private key file."
+}
+
+variable "host_ed25519_pub_key" {
+  type = string
+  default = "ed25519_key.pub"
+  description = "Path of the ED25519 public key file."
+}
 
 variable "image" {
   type = string
   default = "file:///mnt/resources/vms/ubuntu-20.04-server-cloudimg-amd64-docker-base.qcow2"
+  description = "The URI of the base image."
+}
+
+variable "network" {
+  type = string
+  default = "development"
+  description = "Name of the network to attach to the nodes."
 }
 
 variable "nodes" {
@@ -9,24 +27,21 @@ variable "nodes" {
   default = ["alice", "bob", "charlie"]
 }
 
+variable "project" {
+  type = string
+  default = "swarm"
+  description = "Project name. Used to prefix file names."
+}
+
 variable "ram_size" {
   type = string
   default = "2048"
+  description = "RAM size in MB."
 }
 
-variable "network" {
+variable "storage_pool" {
   type = string
-  default = "development"
+  default = "default"
+  description = "The libvirt storage pool to store the images in."
 }
 
-variable "host_ed25519_priv_key" {
-  type = string
-  default = "ed25519_key"
-  sensitive = true
-}
-
-variable "host_ed25519_pub_key" {
-  type = string
-  default = "ed25519_key.pub"
-  sensitive = true
-}
