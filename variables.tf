@@ -27,6 +27,12 @@ variable "nodes" {
   default = ["alice", "bob", "charlie"]
 }
 
+variable "mac_prefix" {
+  type = string
+  default = "0E:00:00:00:00"
+  description = "The MAC address prefix to attach to the index of the node."
+}
+
 variable "project" {
   type = string
   default = "swarm"

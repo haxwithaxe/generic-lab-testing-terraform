@@ -16,7 +16,7 @@ module "nodes" {
   count = length(var.nodes)
   project = var.project
   name = "${var.nodes[count.index]}"
-  mac = format("0E:00:00:00:00:%0.2x", count.index)
+  mac = format("${var.mac_prefix}:%0.2x", count.index)
   image = var.image
   network = var.network
   host_ed25519_priv_key = file(var.host_ed25519_priv_key)
