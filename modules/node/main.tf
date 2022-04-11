@@ -19,7 +19,7 @@ resource "libvirt_volume" "disk_resized" {
   name = "${var.project}-resize-${var.name}.qcow2"
   base_volume_id = libvirt_volume.os_img.id
   pool = var.storage_pool
-  size = 53687091200
+  size = var.disk_size
 }
 
 # Get user data info

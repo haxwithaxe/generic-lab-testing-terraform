@@ -1,3 +1,8 @@
+variable "disk_size" {
+  type = number
+  description = "Disk size in bytes."
+}
+
 variable "host_ed25519_priv_key" {
   type = string
   default = null
