@@ -18,7 +18,7 @@ variable "host_ed25519_pub_key" {
 
 variable "image" {
   type = string
-  default = "file:///mnt/resources/vms/ubuntu-20.04-server-cloudimg-amd64-docker-base.qcow2"
+  default = "file:///mnt/resources/vms/ubuntu-20.04-server-cloudimg-amd64-base.qcow2"
   description = "The URI of the base image."
 }
 
