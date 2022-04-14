@@ -16,7 +16,7 @@ resource "libvirt_volume" "os_img" {
 
 # Resize the base image
 resource "libvirt_volume" "disk_resized" {
-  name = "${var.project}-resize-${var.name}.qcow2"
+  name = "${var.project}-resize.qcow2"
   base_volume_id = libvirt_volume.os_img.id
   pool = var.storage_pool
   size = var.disk_size
