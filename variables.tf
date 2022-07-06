@@ -1,9 +1,3 @@
-variable "disk_size" {
-  type = number
-  default = 5
-  description = "Disk size in gigabytes."
-}
-
 variable "host_ed25519_priv_key" {
   type = string
   default = "ed25519_key"

@@ -14,14 +14,6 @@ resource "libvirt_volume" "os_img" {
   format = "qcow2"
 }
 
-# Resize the base image
-resource "libvirt_volume" "disk_resized" {
-  name = "${var.project}-resize.qcow2"
-  base_volume_id = libvirt_volume.os_img.id
-  pool = var.storage_pool
-  size = var.disk_size
-}
-
 # Get user data info
 data "template_file" "user_data" {
   template = "${file("${path.module}/cloud-init-user-data.yml")}"
@@ -51,7 +43,7 @@ resource "libvirt_domain" "node" {
   }
 
   disk {
-    volume_id = "${libvirt_volume.disk_resized.id}"
+    volume_id = "${libvirt_volume.os_img.id}"
   }
 
   cloudinit = "${libvirt_cloudinit_disk.cloud-init.id}"

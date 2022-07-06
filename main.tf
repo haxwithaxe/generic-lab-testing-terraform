@@ -17,7 +17,6 @@ module "nodes" {
   name = "${var.nodes[count.index]}"
   mac = format("${var.mac_prefix}:%0.2x", count.index)
   image = var.image
-  disk_size = var.disk_size*pow(1024, 3)
   network = var.network
   host_ed25519_priv_key = file(var.host_ed25519_priv_key)
   host_ed25519_pub_key = file(var.host_ed25519_pub_key)
