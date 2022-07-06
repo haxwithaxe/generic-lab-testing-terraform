@@ -14,15 +14,6 @@ hostname: ${hostname}
 
 ssh_pwauth: false
 
-users:
-  - name: hax
-    ssh_authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP+uH65GL+RS0gr8Yo4oMQBUa5h3hpoICKo1ku+efZjg hax@unlucky
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHO77z9BT/ZcmvAZzJRW7VpKYkBO/dAU9oAE0OWKe66r hax@orthrus
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    shell: /bin/bash
-    groups: docker
-
 growpart:
   mode: auto
   devices: ['/']
@@ -38,7 +29,5 @@ disable_root: true
 timezone: "America/New_York"
 
 runcmd:
-  - [sed, -i, 's/hax:[^:]\+/hax:!/', /etc/shadow]
-  - [sed, -i, 's/root:[^:]\+/root:!/', /etc/shadow]
   - [dhclient, -r, ens3]
   - [netplan, apply]
