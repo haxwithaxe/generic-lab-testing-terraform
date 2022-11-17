@@ -21,10 +21,10 @@ variable "name" {
   description = "Node name."
 }
 
-variable "network" {
+variable "bridge" {
   type = string
-  default = "development"
-  description = "Name of the network to attach to the node."
+  default = "br0"
+  description = "Name of the device to attach the nodes to."
 }
 
 variable "mac" {

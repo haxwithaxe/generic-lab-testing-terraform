@@ -12,19 +12,19 @@ variable "host_ed25519_pub_key" {
 
 variable "image" {
   type = string
-  default = "file:///mnt/storage/disks/images/ubuntu-22.04-amd64-base.qcow2"
+  default = "file:///mnt/storage/disks/images/ubuntu-22.04/ubuntu-22.04-amd64-base.qcow2"
   description = "The URI of the base image."
 }
 
-variable "network" {
+variable "bridge" {
   type = string
-  default = "development"
-  description = "Name of the network to attach to the nodes."
+  default = "br0"
+  description = "Name of the device to attach the nodes to."
 }
 
 variable "nodes" {
   type = list(string)
-  default = ["alice", "bob", "charlie"]
+  default = ["alice"]
 }
 
 variable "mac_prefix" {
@@ -35,7 +35,7 @@ variable "mac_prefix" {
 
 variable "project" {
   type = string
-  default = "swarm"
+  default = "test"
   description = "Project name. Used to prefix file names."
 }
 

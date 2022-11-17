@@ -38,7 +38,7 @@ resource "libvirt_domain" "node" {
   vcpu = 2
 
   network_interface {
-    network_name = var.network
+    bridge = var.bridge
     mac = var.mac
   }
 
