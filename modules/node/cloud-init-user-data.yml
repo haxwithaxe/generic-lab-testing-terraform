@@ -9,6 +9,7 @@ package_update: false
 package_upgrade: false
 package_reboot_if_required: false
 
+preserve_hostname: false
 manage_etc_hosts: true
 hostname: ${hostname}
 
@@ -28,6 +29,8 @@ disable_root: true
 
 timezone: "America/New_York"
 
+# Restart the network so that the correct dhcp client name is given to the
+#   server.
 runcmd:
   - [dhclient, -r, ens3]
   - [netplan, apply]
