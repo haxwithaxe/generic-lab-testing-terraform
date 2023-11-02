@@ -35,7 +35,7 @@ resource "libvirt_cloudinit_disk" "cloud-init" {
 resource "libvirt_domain" "node" {
   name = "${var.project}-${var.name}"
   memory = var.ram_size
-  vcpu = 2
+  vcpu = var.vcpu_count
 
   network_interface {
     bridge = var.bridge

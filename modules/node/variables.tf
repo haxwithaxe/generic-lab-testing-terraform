@@ -24,7 +24,7 @@ variable "name" {
 variable "bridge" {
   type = string
   default = "br0"
-  description = "Name of the device to attach the nodes to."
+  description = "Name of the network bridge to attach the node to."
 }
 
 variable "mac" {
@@ -48,4 +48,10 @@ variable "storage_pool" {
   type = string
   default = "default"
   description = "The libvirt storage pool to store the images in."
+}
+
+variable "vcpu_count" {
+  type = string
+  default = "2"
+  description = "The number of vcpus to assign."
 }

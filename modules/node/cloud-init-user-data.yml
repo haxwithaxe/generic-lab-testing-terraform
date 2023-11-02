@@ -10,10 +10,21 @@ package_upgrade: false
 package_reboot_if_required: false
 
 preserve_hostname: false
-manage_etc_hosts: true
+manage_etc_hosts: false
 hostname: ${hostname}
 
 ssh_pwauth: false
+
+users: 
+  - name: hax
+    ssh_import_id:
+      - gh:haxwithaxe
+    passwd: $6$badsalt.$YxV1TC3prkVGQadm4Jq5H3o52q34ukR6L7I0tqnoq5BSB33buc9wZp66IQTxegrCSR.3EfWuy5mFxdn3eHpiQ/
+    groups: [adm, audio, cdrom, dialout, dip, floppy, netdev, plugdev, sudo, video]
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    gecos: haxwithaxe
+    lock_passwd: false
+    shell: /bin/bash
 
 growpart:
   mode: auto
@@ -29,8 +40,7 @@ disable_root: true
 
 timezone: "America/New_York"
 
-# Restart the network so that the correct dhcp client name is given to the
-#   server.
 runcmd:
-  - [dhclient, -r, ens3]
-  - [netplan, apply]
+  - [dhclient, -r, eth0]
+  - [ifdown, eth0]
+  - [ifup, eth0]

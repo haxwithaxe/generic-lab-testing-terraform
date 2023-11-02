@@ -12,24 +12,24 @@ variable "host_ed25519_pub_key" {
 
 variable "image" {
   type = string
-  default = "file:///mnt/storage/disks/images/ubuntu-22.04/ubuntu-22.04-amd64-base.qcow2"
+  default = "file:///mnt/storage/disks/images/debian-latest/debian-latest-amd64-base.qcow2"
   description = "The URI of the base image."
 }
 
 variable "bridge" {
   type = string
   default = "br0"
-  description = "Name of the device to attach the nodes to."
+  description = "Name of the network bridge to attach the nodes to."
 }
 
 variable "nodes" {
   type = list(string)
-  default = ["alice"]
+  default = ["apple"]
 }
 
 variable "mac_prefix" {
   type = string
-  default = "0E:00:00:00:00"
+  default = "0E:00:00:DD:00"
   description = "The MAC address prefix to attach to the index of the node."
 }
 
@@ -51,3 +51,8 @@ variable "storage_pool" {
   description = "The libvirt storage pool to store the images in."
 }
 
+variable "vcpu_count" {
+  type = string
+  default = "2"
+  description = "The number of vcpus to assign."
+}

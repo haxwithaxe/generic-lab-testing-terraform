@@ -21,6 +21,7 @@ module "nodes" {
   host_ed25519_priv_key = file(var.host_ed25519_priv_key)
   host_ed25519_pub_key = file(var.host_ed25519_pub_key)
   ram_size = var.ram_size
+  vcpu_count = var.vcpu_count
   providers = {
     libvirt = libvirt
   }
